@@ -66,8 +66,6 @@ For LMStudio models, download LMStudio from [https://lmstudio.ai/](https://lmstu
 
 - `app/`: Next.js app directory containing pages and API routes
 - `autocomplete-module/`: Core autocomplete functionality
-- `public/`: Static assets
-- `styles/`: Global styles and Tailwind CSS configuration
 
 ## Contributing
 
