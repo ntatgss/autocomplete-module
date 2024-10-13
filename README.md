@@ -4,14 +4,21 @@ This is an example of an AI-powered autocomplete module for text suggestions, de
 
 ## Features
 
-- Supports multiple AI models (OpenAI, Anthropic, LMStudio)
-- React component for easy integration
-- Customizable suggestion generation
-- Efficient text processing
+- Multi-model support: OpenAI, Anthropic Claude, and LMStudio models
+- Real-time AI-powered text suggestions
+- React component for seamless integration
+- Customizable suggestion generation with adjustable parameters
+- Efficient text processing and suggestion refinement
+- Dynamic model selection with API-based model fetching for LMStudio
+- Streaming responses for improved performance
+- Keyboard shortcuts for accepting suggestions (Tab) and hiding suggestions (Esc)
+- Configurable maximum input length based on model capabilities
+- Error handling and loading states for improved user experience
+- Tailwind CSS for responsive and customizable styling
 
 ## Getting Started
 
-First, pull the repo from Github
+First, clone the repository:
 
 ```bash
 git clone https://github.com/ntatgss/autocomplete-module.git
@@ -23,24 +30,22 @@ Install the dependencies:
 npm install
 ```
 
+Create a `.env.local` file in the root directory and add your API keys:
+
+```
+OPENAI_API_KEY=your_openai_api_key
+ANTHROPIC_API_KEY=your_anthropic_api_key
+```
+
 Then, run the development server:
 
 ```bash
 npm run dev
 ```
 
-Open http://localhost:3000 with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## API
-
-### Autocomplete Component Props
-
-- `onSelect: (selected: string) => void`: Callback function when a suggestion is selected.
-- `generateSuggestions: (input: string, model: string) => Promise<string>`: Function to generate suggestions.
-- `model: string`: The AI model to use for generating suggestions.
-- `maxInputLength: number`: Maximum length of the input text.
-
-### Helper Functions
+## Helper Functions
 
 - `generateSuggestion(input: string, model: string): Promise<string>`: Generate a suggestion based on input and model.
 - `processSuggestion(input: string, suggestion: string): string`: Process and refine the generated suggestion.
@@ -51,12 +56,18 @@ Open http://localhost:3000 with your browser to see the result.
 - Anthropic models (e.g., 'anthropic/claude-3-haiku-20240307')
 - LMStudio models
 
+## Configuration for AI Models
 
-## Configuration
+Make sure to set the appropriate API keys for the AI models you're using in your `.env.local` file.
 
-Make sure to set the appropriate API keys for the AI models you're using. For OpenAI, set the `OPENAI_API_KEY` environment variable. For Anthropic, set the `ANTHROPIC_API_KEY` environment variable.
+For LMStudio models, download LMStudio from [https://lmstudio.ai/](https://lmstudio.ai/) and load a model in the app. Ensure you start the server in LMStudio before using it with this project.
 
-For LMStudio models, download LMStudio from https://lmstudio.ai/ and load model in-app. Make sure you start the server in LMStudio.
+## Project Structure
+
+- `app/`: Next.js app directory containing pages and API routes
+- `autocomplete-module/`: Core autocomplete functionality
+- `public/`: Static assets
+- `styles/`: Global styles and Tailwind CSS configuration
 
 ## Contributing
 
@@ -64,4 +75,4 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
-This project is licensed under the MIT License - see the file LICENSE for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
