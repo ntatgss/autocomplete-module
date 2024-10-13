@@ -38,7 +38,7 @@ export default function AutocompletePage() {
 
   return (
     <div className="autocomplete-page p-4 max-w-3xl mx-auto">
-      <h1 className="text-3xl font-bold mb-6 text-center">AI Autocomplete</h1>
+      <h1 className="text-3xl font-bold mb-6 text-center">AI Drafting</h1>
       <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6 rounded-md">
         <p className="text-sm text-black leading-relaxed">
           Experience real-time AI-powered suggestions as you type. Write faster and more efficiently with advanced language model predictions. Powered by OpenAI, Anthropic, and MetaAI models.
@@ -53,7 +53,7 @@ export default function AutocompletePage() {
           id="model-select"
           value={selectedModel}
           onChange={(e) => setSelectedModel(e.target.value)}
-          className="w-full p-2 border rounded"
+          className="w-full p-2 border rounded text-sm"
         >
           {models.map((model) => (
             <option key={model.value} value={model.value}>
@@ -68,7 +68,7 @@ export default function AutocompletePage() {
           id="role-select"
           value={selectedRole}
           onChange={(e) => setSelectedRole(e.target.value as RoleType)}
-          className="w-full p-2 border rounded"
+          className="w-full p-2 border rounded text-sm"
         >
           {(Object.keys(roles) as RoleType[]).map((role) => (
             <option key={role} value={role}>
@@ -77,12 +77,13 @@ export default function AutocompletePage() {
           ))}
         </select>
       </div>
-      <p className="mb-2">Start typing:</p>
+      <p className="mb-2 text-sm">Start typing:</p>
       <Autocomplete
         onSelect={handleSelect}
         generateSuggestions={(input: string) => generateSuggestion(input, selectedModel, selectedRole)}
         model={selectedModel}
         maxInputLength={modelMaxLengths[selectedModel] || 1000}
+        className="text-sm"
       />
     </div>
   );
