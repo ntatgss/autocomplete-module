@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AI-Powered Autocomplete Next.js App Example
+
+This is an example of an AI-powered autocomplete module for text suggestions, designed to work with various AI models including OpenAI, Anthropic, and LMStudio.
+
+## Features
+
+- Supports multiple AI models (OpenAI, Anthropic, LMStudio)
+- React component for easy integration
+- Customizable suggestion generation
+- Efficient text processing
 
 ## Getting Started
 
-First, run the development server:
+First, pull the repo from Github
+
+```bash
+git clone https://github.com/ntatgss/autocomplete-module.git
+```
+
+Install the dependencies:
+
+```bash
+npm install
+```
+
+Then, run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000 with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## API
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Autocomplete Component Props
 
-## Learn More
+- `onSelect: (selected: string) => void`: Callback function when a suggestion is selected.
+- `generateSuggestions: (input: string, model: string) => Promise<string>`: Function to generate suggestions.
+- `model: string`: The AI model to use for generating suggestions.
+- `maxInputLength: number`: Maximum length of the input text.
 
-To learn more about Next.js, take a look at the following resources:
+### Helper Functions
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `generateSuggestion(input: string, model: string): Promise<string>`: Generate a suggestion based on input and model.
+- `processSuggestion(input: string, suggestion: string): string`: Process and refine the generated suggestion.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Supported Models
 
-## Deploy on Vercel
+- OpenAI models (e.g., 'openai/gpt-4o-mini')
+- Anthropic models (e.g., 'anthropic/claude-3-haiku-20240307')
+- LMStudio models
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Configuration
+
+Make sure to set the appropriate API keys for the AI models you're using. For OpenAI, set the `OPENAI_API_KEY` environment variable. For Anthropic, set the `ANTHROPIC_API_KEY` environment variable.
+
+For LMStudio models, download LMStudio from https://lmstudio.ai/ and load model in-app. Make sure you start the server in LMStudio.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is licensed under the MIT License - see the file LICENSE for details.

@@ -1,6 +1,5 @@
 import { processSuggestion } from './suggestionProcessor';
 import { Configuration, OpenAIApi } from 'openai-edge';
-import { OpenAIStream } from 'ai';
 
 interface Message {
     role: 'system' | 'user' | 'assistant';
@@ -112,7 +111,7 @@ async function handleLMStudioRequest(modelName: string, messages: Message[]): Pr
 }
 
 async function handleAnthropicRequest(modelName: string, messages: Message[]): Promise<string> {
-    const response = await fetch('/anthropic/api', {
+    const response = await fetch('/api/anthropic', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -123,7 +122,7 @@ async function handleAnthropicRequest(modelName: string, messages: Message[]): P
     });
 
     if (!response.ok) {
-        throw new Error('Failed to generate suggestion');
+        throw new Error(`Anthropic API error: ${response.statusText}`);
     }
 
     return await response.text();

@@ -5,13 +5,17 @@ interface AutocompleteProps {
   generateSuggestions: (input: string, model: string) => Promise<string>;
   model: string;
   maxInputLength: number;
+  className?: string;
+  suggestionClassName?: string;
 }
 
 const Autocomplete: React.FC<AutocompleteProps> = ({ 
   onSelect, 
   generateSuggestions, 
   model, 
-  maxInputLength
+  maxInputLength,
+  className = '',
+  suggestionClassName = ''
 }) => {
   const [input, setInput] = useState('');
   const [suggestion, setSuggestion] = useState('');
@@ -113,7 +117,7 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
   };
 
   return (
-    <div className="relative w-full">
+    <div className={`relative w-full ${className}`}>
       <textarea
         ref={textareaRef}
         value={input}
@@ -128,14 +132,14 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
       />
       {showSuggestion && suggestion && (
         <div 
-          className="absolute left-0 right-0 p-2 bg-gray-100 border-l border-r border-b rounded-b"
+          className={`absolute left-0 right-0 p-2 bg-gray-100 border-l border-r border-b rounded-b ${suggestionClassName}`}
           id="autocomplete-suggestion"
           role="status"
           aria-live="polite"
         >
-          <pre className="whitespace-pre-wrap">
-            <span className="text-gray-500">{input}</span>
-            <span className="text-gray-400">{suggestion}</span>
+          <pre className="whitespace-pre-wrap break-words">
+            <span>{input}</span>
+            <span style={{ color: '#9CA3AF' }}>{suggestion}</span>
           </pre>
         </div>
       )}
