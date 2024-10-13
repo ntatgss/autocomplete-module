@@ -37,9 +37,9 @@ export default function AutocompletePage() {
   };
 
   return (
-    <div className="autocomplete-page p-4 max-w-3xl mx-auto">
-      <h1 className="text-3xl font-bold mb-6 text-center">AI Drafting</h1>
-      <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6 rounded-md">
+    <div className="autocomplete-page p-4 sm:p-6 max-w-3xl mx-auto">
+      <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6 text-center">AI Drafting</h1>
+      <div className="bg-blue-50 border-l-4 border-blue-500 p-3 sm:p-4 mb-4 sm:mb-6 rounded-md">
         <p className="text-sm text-black leading-relaxed">
           Experience real-time AI-powered suggestions as you type. Write faster and more efficiently with advanced language model predictions. Powered by OpenAI, Anthropic, and MetaAI models.
         </p>
@@ -47,8 +47,8 @@ export default function AutocompletePage() {
           Tip: Press Tab to accept, Esc to hide suggestions.
         </p>
       </div>
-      <div className="mb-6">
-        <label htmlFor="model-select" className="block mb-2 font-medium">Select Model:</label>
+      <div className="mb-4 sm:mb-6">
+        <label htmlFor="model-select" className="block mb-2 font-medium text-sm sm:text-base">Select Model:</label>
         <select
           id="model-select"
           value={selectedModel}
@@ -62,8 +62,8 @@ export default function AutocompletePage() {
           ))}
         </select>
       </div>
-      <div className="mb-6">
-        <label htmlFor="role-select" className="block mb-2 font-medium">Select Role:</label>
+      <div className="mb-4 sm:mb-6">
+        <label htmlFor="role-select" className="block mb-2 font-medium text-sm sm:text-base">Select Role:</label>
         <select
           id="role-select"
           value={selectedRole}
@@ -77,13 +77,13 @@ export default function AutocompletePage() {
           ))}
         </select>
       </div>
-      <p className="mb-2 text-sm">Start typing:</p>
+      <p className="mb-2 text-xs sm:text-sm">Start typing:</p>
       <Autocomplete
         onSelect={handleSelect}
         generateSuggestions={(input: string) => generateSuggestion(input, selectedModel, selectedRole)}
         model={selectedModel}
         maxInputLength={modelMaxLengths[selectedModel] || 1000}
-        className="text-sm"
+        className="text-sm w-full"
       />
     </div>
   );

@@ -124,7 +124,7 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
         onChange={handleInputChange}
         onKeyDown={handleKeyDown}
         onSelect={(e) => setCursorPosition(e.currentTarget.selectionStart)}
-        className="w-full p-2 border rounded resize-vertical"
+        className="w-full p-2 border rounded resize-vertical text-sm"
         placeholder="Start typing..."
         rows={5}
         aria-label="Autocomplete input"
@@ -132,15 +132,21 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
       />
       {showSuggestion && suggestion && (
         <div 
-          className={`absolute left-0 right-0 p-2 bg-gray-100 border-l border-r border-b rounded-b ${suggestionClassName}`}
+          className="absolute left-0 right-0 p-2 bg-gray-100 border-l border-r border-b rounded-b max-h-40 overflow-y-auto"
           id="autocomplete-suggestion"
           role="status"
           aria-live="polite"
         >
-          <pre className="whitespace-pre-wrap break-words">
-            <span>{input}</span>
-            <span style={{ color: '#9CA3AF' }}>{suggestion}</span>
-          </pre>
+          <div className="whitespace-pre-wrap break-words text-sm">
+            <span style={{ color: 'black !important' }}>{input}</span>
+            <span style={{ 
+              color: '#9CA3AF', 
+              padding: '0 2px', 
+              borderRadius: '2px',
+            }}>
+              {suggestion}
+            </span>
+          </div>
         </div>
       )}
       {error && (
