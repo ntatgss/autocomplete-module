@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Autocomplete from '@/autocomplete-module/Autocomplete';
-import { generateSuggestion, modelMaxLengths } from '@/autocomplete-module/aiService';
+import { generateSuggestion, modelMaxLengths, roles, RoleType, defaultRole } from '@/autocomplete-module/aiService';
 
 const defaultModels = [
   { value: 'anthropic/claude-3-haiku-20240307', label: 'Claude 3 Haiku' },
@@ -11,6 +11,7 @@ const defaultModels = [
 
 export default function AutocompletePage() {
   const [selectedModel, setSelectedModel] = useState(defaultModels[0].value);
+  const [selectedRole, setSelectedRole] = useState<RoleType>(defaultRole);
   const [models, setModels] = useState(defaultModels);
 
   useEffect(() => {
@@ -61,10 +62,25 @@ export default function AutocompletePage() {
           ))}
         </select>
       </div>
+      <div className="mb-6">
+        <label htmlFor="role-select" className="block mb-2 font-medium">Select Role:</label>
+        <select
+          id="role-select"
+          value={selectedRole}
+          onChange={(e) => setSelectedRole(e.target.value as RoleType)}
+          className="w-full p-2 border rounded"
+        >
+          {(Object.keys(roles) as RoleType[]).map((role) => (
+            <option key={role} value={role}>
+              {role}
+            </option>
+          ))}
+        </select>
+      </div>
       <p className="mb-2">Start typing:</p>
       <Autocomplete
         onSelect={handleSelect}
-        generateSuggestions={(input: string) => generateSuggestion(input, selectedModel)}
+        generateSuggestions={(input: string) => generateSuggestion(input, selectedModel, selectedRole)}
         model={selectedModel}
         maxInputLength={modelMaxLengths[selectedModel] || 1000}
       />
