@@ -2,6 +2,8 @@
 
 This is an example of an AI-powered autocomplete module for text suggestions, designed to work with various AI models including OpenAI, Anthropic, and LMStudio.
 
+![AI Autocomplete Demo](/public/ai-autocomplete.png)
+
 ## Features
 
 - Multi-model support: OpenAI, Anthropic Claude, and LMStudio models
