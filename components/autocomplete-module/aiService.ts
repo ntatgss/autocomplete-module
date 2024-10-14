@@ -57,15 +57,14 @@ export async function generateSuggestion(input: string, model: string, role: Rol
         modelName = model;
     }
 
-    // System prompt is included in the messages array for OpenAI and LMStudio
     const messages: Message[] = [
         { 
             role: 'system', 
-            content: roles[role]
+            content: roles[role] + "\nAlways complete your response with a full sentence. If you start a sentence, make sure to finish it."
         },
         { 
             role: 'user', 
-            content: `Continue this text with a few words or up to 2 sentences: ${input}` 
+            content: `Continue this text, completing any unfinished sentences and adding up to 2 full sentences: ${input}` 
         }
     ];
 
@@ -103,7 +102,7 @@ async function handleOpenAIRequest(modelName: string, messages: Message[]): Prom
         const response = await openai.createChatCompletion({
             model: modelName,
             messages: openAIMessages,
-            max_tokens: 50,
+            max_tokens: 100,
             stream: false,
         });
 
@@ -124,7 +123,7 @@ async function handleLMStudioRequest(modelName: string, messages: Message[]): Pr
         body: JSON.stringify({
             messages: messages,
             model: modelName,
-            max_tokens: 50,
+            max_tokens: 100,
         }),
     });
 
@@ -146,8 +145,8 @@ async function handleAnthropicRequest(modelName: string, messages: Message[], ro
         body: JSON.stringify({
             messages: userMessages,
             model: modelName,
-            max_tokens: 50,
-            system: roles[role], // System prompt is sent as a separate parameter for Anthropic
+            max_tokens: 100,
+            system: roles[role] + "\nAlways complete your response with a full sentence. If you start a sentence, make sure to finish it.",
         }),
     });
 

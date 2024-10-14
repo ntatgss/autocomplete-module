@@ -34,8 +34,14 @@ export function processSuggestion(input: string, suggestion: string): string {
       }
     }
   
-    // Remove any incomplete words or sentences at the end
-    suggestion = suggestion.replace(/\s+\S+[^.!?]*$/, '');
-  
+    // Ensure we keep complete sentences
+    const sentences = suggestion.match(/[^.!?]+[.!?]+/g) || [];
+    if (sentences.length > 0) {
+      const completeSentences = sentences.join(' ');
+      const lastSentenceEnd = suggestion.lastIndexOf(sentences[sentences.length - 1]) + sentences[sentences.length - 1].length;
+      const remainingText = suggestion.slice(lastSentenceEnd).trim();
+      suggestion = (completeSentences + ' ' + remainingText).trim();
+    }
+
     return suggestion;
-  }
+}

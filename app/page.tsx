@@ -66,10 +66,16 @@ export default function AutocompletePage() {
       </div>
       <div className={`bg-blue-50 dark:bg-blue-900 border-l-4 border-blue-500 p-3 sm:p-4 mb-4 sm:mb-6 rounded-md`}>
         <p className="text-sm text-black dark:text-white leading-relaxed">
-          Experience real-time AI-powered suggestions as you type. Write faster and more efficiently with advanced language model predictions. Powered by OpenAI, Anthropic, and MetaAI models.
+          Experience the future of writing with our AI-powered drafting tool. As you type, receive real-time suggestions from advanced language models, helping you craft compelling content faster and more efficiently.
         </p>
+        <ul className="mt-2 text-sm text-black dark:text-white list-disc list-inside">
+          <li>Powered by cutting-edge AI models from OpenAI, Anthropic, and more</li>
+          <li>Adapts to various writing styles and topics</li>
+          <li>Helps overcome writer's block and sparks creativity</li>
+          <li>Customizable to suit your specific needs</li>
+        </ul>
         <p className="text-sm text-black dark:text-white mt-2 font-semibold">
-          Tip: Press Tab to accept, Esc to hide suggestions.
+          Tip: Press Tab to accept suggestions, Esc to hide them.
         </p>
       </div>
       <div className="mb-4 sm:mb-6">
@@ -102,20 +108,11 @@ export default function AutocompletePage() {
           ))}
         </select>
       </div>
-      <p className="mb-2 text-xs sm:text-sm">Start typing:</p>
-      <div className="relative mb-4">
-        <Autocomplete
-          ref={autocompleteRef}
-          onSelect={handleSelect}
-          generateSuggestions={(input: string) => generateSuggestion(input, selectedModel, selectedRole)}
-          model={selectedModel}
-          maxInputLength={modelMaxLengths[selectedModel] || 1000}
-          className="text-sm w-full"
-          suggestionClassName="mt-1"
-        />
+      <div className="flex items-center justify-between mb-2">
+        <p className="text-xs sm:text-sm">Start typing:</p>
         <button
           onClick={handleCopy}
-          className={`absolute right-2 top-2 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-300 transition-colors ${
+          className={`p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-300 transition-colors ${
             isCopied 
               ? 'bg-green-500 text-white' 
               : `${theme === 'dark' ? 'bg-gray-700 text-gray-200 hover:bg-gray-600' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`
@@ -132,6 +129,17 @@ export default function AutocompletePage() {
             </svg>
           )}
         </button>
+      </div>
+      <div className="relative mb-4">
+        <Autocomplete
+          ref={autocompleteRef}
+          onSelect={handleSelect}
+          generateSuggestions={(input: string) => generateSuggestion(input, selectedModel, selectedRole)}
+          model={selectedModel}
+          maxInputLength={modelMaxLengths[selectedModel] || 1000}
+          className="text-sm w-full"
+          suggestionClassName="mt-1"
+        />
       </div>
     </div>
   );
