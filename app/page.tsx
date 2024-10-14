@@ -7,8 +7,8 @@ import { generateSuggestion, modelMaxLengths, roles, RoleType, defaultRole } fro
 import { ThemeToggle } from '@/components/ThemeToggle';
 
 const defaultModels = [
-  { value: 'anthropic/claude-3-haiku-20240307', label: 'Claude 3 Haiku' },
   { value: 'openai/gpt-4o-mini', label: 'GPT-4o Mini' },
+  { value: 'anthropic/claude-3-haiku-20240307', label: 'Claude 3 Haiku' },
 ];
 
 export default function AutocompletePage() {
