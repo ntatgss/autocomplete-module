@@ -33,9 +33,10 @@ const Autocomplete = forwardRef<AutocompleteRef, AutocompleteProps>(
     const textareaRef = useRef<HTMLTextAreaElement>(null);
     const suggestionTimeoutRef = useRef<NodeJS.Timeout | null>(null);
     const thinkingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+    const [exceededMaxLength, setExceededMaxLength] = useState(false);
 
     const getSuggestion = async () => {
-      if (input.trim()) {
+      if (input.trim() && input.length <= maxInputLength) {
         setIsLoading(true);
         setIsThinking(false);
         try {
@@ -74,7 +75,7 @@ const Autocomplete = forwardRef<AutocompleteRef, AutocompleteProps>(
       setIsThinking(false);
       setIsLoading(false);
 
-      if (cursorPosition === input.length && input.trim().length > 0) {
+      if (cursorPosition === input.length && input.trim().length > 0 && input.length <= maxInputLength) {
         thinkingTimeoutRef.current = setTimeout(() => {
           if (input.trim().length > 0) {
             setIsThinking(true);
@@ -94,7 +95,7 @@ const Autocomplete = forwardRef<AutocompleteRef, AutocompleteProps>(
           clearTimeout(thinkingTimeoutRef.current);
         }
       };
-    }, [input, model, cursorPosition]);
+    }, [input, model, cursorPosition, maxInputLength]);
 
     useEffect(() => {
       if (textareaRef.current) {
@@ -108,10 +109,17 @@ const Autocomplete = forwardRef<AutocompleteRef, AutocompleteProps>(
     }));
 
     const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-      const newInput = e.target.value.slice(0, maxInputLength);
+      const newInput = e.target.value;
       setInput(newInput);
       setCursorPosition(e.target.selectionStart);
       setShowSuggestion(e.target.selectionStart === newInput.length);
+      setExceededMaxLength(newInput.length > maxInputLength);
+
+      // Allow typing beyond maxLength, but don't update state
+      if (e.target.value.length > maxInputLength) {
+        e.target.value = newInput;
+        e.target.setSelectionRange(cursorPosition, cursorPosition);
+      }
     };
 
     const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
@@ -147,6 +155,11 @@ const Autocomplete = forwardRef<AutocompleteRef, AutocompleteProps>(
           aria-label="Autocomplete input"
           aria-describedby="autocomplete-suggestion"
         />
+        {exceededMaxLength && (
+          <div className="text-yellow-500 mt-2 text-sm" role="alert">
+            Input exceeds {maxInputLength} characters. AI suggestions will only use the first {maxInputLength} characters.
+          </div>
+        )}
         <div className="mt-2 text-sm">
           {isLoading && <div className="text-gray-500">Loading suggestion...</div>}
           {!isLoading && isThinking && <div className="text-gray-500">Thinking...</div>}

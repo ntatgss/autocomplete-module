@@ -7,9 +7,9 @@ interface Message {
 }
 
 export const modelMaxLengths: { [key: string]: number } = {
-    'anthropic/claude-3-haiku-20240307': 8192,
-    'openai/gpt-4o-mini': 8192,
-    'lmstudio': 8192, // Default value for LMStudio models
+    'anthropic/claude-3-haiku-20240307': 100000,
+    'openai/gpt-4o-mini': 100000,
+    'lmstudio': 100000, // Default value for LMStudio models
 };
 
 const LMSTUDIO_BASE_URL = 'http://localhost:1234/v1';
@@ -102,7 +102,7 @@ async function handleOpenAIRequest(modelName: string, messages: Message[]): Prom
         const response = await openai.createChatCompletion({
             model: modelName,
             messages: openAIMessages,
-            max_tokens: 100,
+            max_tokens: 1000,
             stream: false,
         });
 
@@ -123,7 +123,7 @@ async function handleLMStudioRequest(modelName: string, messages: Message[]): Pr
         body: JSON.stringify({
             messages: messages,
             model: modelName,
-            max_tokens: 100,
+            max_tokens: 1000,
         }),
     });
 
@@ -145,7 +145,7 @@ async function handleAnthropicRequest(modelName: string, messages: Message[], ro
         body: JSON.stringify({
             messages: userMessages,
             model: modelName,
-            max_tokens: 100,
+            max_tokens: 1000,
             system: roles[role] + "\nAlways complete your response with a full sentence. If you start a sentence, make sure to finish it.",
         }),
     });

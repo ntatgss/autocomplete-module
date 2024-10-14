@@ -68,12 +68,6 @@ export default function AutocompletePage() {
         <p className="text-sm text-black dark:text-white leading-relaxed">
           Experience the future of writing with our AI-powered drafting tool. As you type, receive real-time suggestions from advanced language models, helping you craft compelling content faster and more efficiently.
         </p>
-        <ul className="mt-2 text-sm text-black dark:text-white list-disc list-inside">
-          <li>Powered by cutting-edge AI models from OpenAI, Anthropic, and more</li>
-          <li>Adapts to various writing styles and topics</li>
-          <li>Helps overcome writer's block and sparks creativity</li>
-          <li>Customizable to suit your specific needs</li>
-        </ul>
         <p className="text-sm text-black dark:text-white mt-2 font-semibold">
           Tip: Press Tab to accept suggestions, Esc to hide them.
         </p>
@@ -136,7 +130,7 @@ export default function AutocompletePage() {
           onSelect={handleSelect}
           generateSuggestions={(input: string) => generateSuggestion(input, selectedModel, selectedRole)}
           model={selectedModel}
-          maxInputLength={modelMaxLengths[selectedModel] || 1000}
+          maxInputLength={modelMaxLengths[selectedModel] || 100000}
           className="text-sm w-full"
           suggestionClassName="mt-1"
         />
