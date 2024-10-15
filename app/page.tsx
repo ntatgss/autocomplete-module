@@ -113,7 +113,7 @@ export default function HomePage() {
                   </CardHeader>
                   <CardContent>
                     <CardDescription>
-                      Utilize Claude's advanced language capabilities for nuanced and contextual writing assistance.
+                      Utilize Claude&apos;s advanced language capabilities for nuanced and contextual writing assistance.
                     </CardDescription>
                   </CardContent>
                 </Card>
@@ -212,7 +212,7 @@ export default function HomePage() {
       <footer className="w-full py-6 bg-background">
         <div className="container px-4 flex flex-col items-center justify-between gap-4 md:flex-row">
           <p className="text-center text-sm leading-loose text-muted-foreground md:text-left">
-            © 2024 AI Drafting Tool. All rights reserved.
+            &copy; 2024 AI Drafting Tool. All rights reserved.
           </p>
           <nav className="flex gap-4">
             <Link href="#" className="text-sm font-medium text-muted-foreground hover:text-primary">

@@ -36,7 +36,7 @@ function getFriendlyModelName(modelName: string): string {
   return processedParts.join(' ')
 }
 
-export default function AutocompletePage() {
+export default function DraftPage() {
   const [mounted, setMounted] = useState(false)
   const [selectedModel, setSelectedModel] = useState<string | null>(null)
   const [selectedRole, setSelectedRole] = useState<RoleType>(defaultRole)
