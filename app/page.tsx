@@ -140,7 +140,7 @@ export default function HomePage() {
               <motion.div variants={fadeIn} initial="initial" whileInView="animate" viewport={{ once: true }}>
                 <Card>
                   <CardContent className="pt-6">
-                    <p className="text-lg mb-2">"This AI tool has completely transformed my writing process. It's like having a brilliant writing partner available 24/7!"</p>
+                    <p className="text-lg mb-2">&ldquo;This AI tool has completely transformed my writing process. It&apos;s like having a brilliant writing partner available 24/7!&rdquo;</p>
                     <p className="font-semibold">- Sarah J., Content Creator</p>
                   </CardContent>
                 </Card>
@@ -148,7 +148,7 @@ export default function HomePage() {
               <motion.div variants={fadeIn} initial="initial" whileInView="animate" viewport={{ once: true }}>
                 <Card>
                   <CardContent className="pt-6">
-                    <p className="text-lg mb-2">"The real-time suggestions have helped me overcome writer's block countless times. It's an indispensable tool for any writer."</p>
+                    <p className="text-lg mb-2">&ldquo;The real-time suggestions have helped me overcome writer&apos;s block countless times. It&apos;s an indispensable tool for any writer.&rdquo;</p>
                     <p className="font-semibold">- Mark T., Novelist</p>
                   </CardContent>
                 </Card>
