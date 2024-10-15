@@ -1,4 +1,4 @@
-import React, { forwardRef, useState, useEffect, useRef, useImperativeHandle, KeyboardEvent } from 'react';
+import React, { forwardRef, useState, useEffect, useRef, useImperativeHandle, KeyboardEvent, TouchEvent } from 'react';
 
 interface AutocompleteProps {
   onSelect: (selected: string) => void;
@@ -34,6 +34,8 @@ const Autocomplete = forwardRef<AutocompleteRef, AutocompleteProps>(
     const suggestionTimeoutRef = useRef<NodeJS.Timeout | null>(null);
     const thinkingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
     const [exceededMaxLength, setExceededMaxLength] = useState(false);
+    const suggestionRef = useRef<HTMLDivElement>(null);
+    const [isTouchScrolling, setIsTouchScrolling] = useState(false);
 
     const getSuggestion = async () => {
       if (input.trim() && input.length <= maxInputLength) {
@@ -141,6 +143,20 @@ const Autocomplete = forwardRef<AutocompleteRef, AutocompleteProps>(
       }
     };
 
+    const handleTouchStart = (e: TouchEvent<HTMLDivElement>) => {
+      setIsTouchScrolling(true);
+    };
+
+    const handleTouchEnd = (e: TouchEvent<HTMLDivElement>) => {
+      setIsTouchScrolling(false);
+    };
+
+    const handleTouchMove = (e: TouchEvent<HTMLDivElement>) => {
+      if (isTouchScrolling && suggestionRef.current) {
+        e.stopPropagation();
+      }
+    };
+
     return (
       <div className={`relative w-full ${className}`}>
         <textarea
@@ -149,7 +165,7 @@ const Autocomplete = forwardRef<AutocompleteRef, AutocompleteProps>(
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
           onSelect={(e) => setCursorPosition(e.currentTarget.selectionStart)}
-          className="w-full p-2 border rounded resize-none overflow-hidden text-sm"
+          className="w-full p-2 border rounded resize-none overflow-hidden text-sm bg-background text-foreground"
           style={{ minHeight: '100px' }}
           placeholder="Start typing..."
           aria-label="Autocomplete input"
@@ -166,18 +182,18 @@ const Autocomplete = forwardRef<AutocompleteRef, AutocompleteProps>(
         </div>
         {showSuggestion && suggestion && (
           <div 
-            className="absolute left-0 right-0 p-2 bg-gray-100 border-l border-r border-b rounded-b max-h-40 overflow-y-auto"
+            ref={suggestionRef}
+            className={`absolute left-0 right-0 p-2 bg-background border-l border-r border-b rounded-b ${suggestionClassName}`}
             id="autocomplete-suggestion"
             role="status"
             aria-live="polite"
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+            onTouchMove={handleTouchMove}
           >
             <div className="whitespace-pre-wrap break-words text-sm">
-              <span style={{ color: 'black !important' }}>{input}</span>
-              <span style={{ 
-                color: '#9CA3AF', 
-                padding: '0 2px', 
-                borderRadius: '2px',
-              }}>
+              <span className="text-foreground">{input}</span>
+              <span className="text-muted-foreground bg-accent">
                 {suggestion}
               </span>
             </div>
