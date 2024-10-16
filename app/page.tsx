@@ -125,7 +125,7 @@ export default function HomePage() {
                   </CardHeader>
                   <CardContent>
                     <CardDescription>
-                      Harness the power of Google's advanced AI for versatile and efficient language understanding and generation.
+                      Harness the power of Google&apos;s advanced AI for versatile and efficient language understanding and generation.
                     </CardDescription>
                   </CardContent>
                 </Card>
