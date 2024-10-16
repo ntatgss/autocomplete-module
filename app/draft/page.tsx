@@ -98,16 +98,23 @@ export default function DraftPage() {
   }
 
   return (
-    <div className="container mx-auto p-4">
-      <Card className="w-full max-w-3xl mx-auto overflow-visible">
+    <div className="container mx-auto p-4 h-screen flex flex-col">
+      <Card className="flex-grow flex flex-col overflow-hidden">
         <CardHeader>
           <CardTitle>AI Drafting</CardTitle>
-          <CardDescription>
-            Experience the future of writing with our AI-powered drafting tool. As you type, receive real-time suggestions from advanced language models, helping you craft compelling content faster and more efficiently.
+          <CardDescription className="space-y-2">
+            <p>
+              Experience the future of writing with our AI-powered drafting tool.
+              Receive real-time suggestions as you type, helping you craft compelling content faster and more efficiently.
+            </p>
+            <ul className="list-disc list-inside">
+              <li>Press <kbd className="px-1 py-0.5 rounded bg-gray-200 text-gray-800 text-xs font-semibold">Tab</kbd> to accept suggestion</li>
+              <li>Press <kbd className="px-1 py-0.5 rounded bg-gray-200 text-gray-800 text-xs font-semibold">Esc</kbd> to dismiss suggestion</li>
+            </ul>
           </CardDescription>
         </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="space-y-2">
+        <CardContent className="space-y-4 flex-grow flex flex-col">
+          {/* <div className="space-y-2">
             <label htmlFor="model-select" className="text-sm font-medium">
               Select Model:
             </label>
@@ -123,7 +130,7 @@ export default function DraftPage() {
                 ))}
               </SelectContent>
             </Select>
-          </div>
+          </div> */}
           <div className="space-y-2">
             <label htmlFor="role-select" className="text-sm font-medium">
               Select Role:
@@ -141,27 +148,29 @@ export default function DraftPage() {
               </SelectContent>
             </Select>
           </div>
-          <div className="flex items-center justify-between">
-            <p className="text-sm font-medium">Your draft:</p>
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={handleCopy}
-              className="h-8 w-8"
-            >
-              {isCopied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-            </Button>
-          </div>
-          <div className="relative">
-            <Autocomplete
-              ref={autocompleteRef}
-              onSelect={handleSelect}
-              generateSuggestions={(input: string) => generateSuggestion(input, selectedModel, selectedRole)}
-              model={selectedModel}
-              maxInputLength={modelMaxLengths[selectedModel] || 100000}
-              className="min-h-[200px] w-full"
-              suggestionClassName="mt-1 bg-background border rounded-md shadow-lg z-10 max-h-60 overflow-y-auto touch-pan-y"
-            />
+          <div className="flex-grow flex flex-col">
+            <div className="flex items-center justify-between mb-2">
+              <p className="text-sm font-medium">Your draft:</p>
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={handleCopy}
+                className="h-8 w-8"
+              >
+                {isCopied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+              </Button>
+            </div>
+            <div className="relative flex-grow">
+              <Autocomplete
+                ref={autocompleteRef}
+                onSelect={handleSelect}
+                generateSuggestions={(input: string) => generateSuggestion(input, selectedModel, selectedRole)}
+                model={selectedModel}
+                maxInputLength={modelMaxLengths[selectedModel] || 100000}
+                className="h-full w-full"
+                suggestionClassName="mt-1 bg-background border rounded-md shadow-lg z-10 max-h-60 overflow-y-auto touch-pan-y"
+              />
+            </div>
           </div>
         </CardContent>
       </Card>

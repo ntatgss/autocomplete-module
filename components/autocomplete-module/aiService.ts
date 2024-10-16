@@ -22,7 +22,7 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration);
 
-export const defaultRole: RoleType = "General AI Writer";
+export const defaultRole: RoleType = "General Writer";
 
 export async function generateSuggestion(input: string, model: string, role: RoleType = defaultRole): Promise<string> {
     let modelType: string, modelName: string;

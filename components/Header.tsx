@@ -4,6 +4,10 @@ import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ThemeToggle } from './ThemeToggle';
+import { SignInButton } from '@clerk/nextjs';
+import { SignedOut } from '@clerk/nextjs';
+import { SignedIn } from '@clerk/nextjs';
+import { UserButton } from '@clerk/nextjs';
 
 const Header: React.FC = () => {
   const pathname = usePathname();
@@ -31,6 +35,12 @@ const Header: React.FC = () => {
           >
             Draft
           </Link>
+          <SignedOut>
+            <SignInButton />
+          </SignedOut>
+          <SignedIn>
+            <UserButton />
+          </SignedIn>
           <ThemeToggle />
         </div>
       </nav>
