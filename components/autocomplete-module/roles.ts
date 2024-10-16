@@ -14,3 +14,12 @@ export const roles: Record<RoleType, string> = {
   "Renowned Journalist": "You are an acclaimed journalist, known for in-depth investigation and compelling storytelling. Your work is insightful and objective, skillfully unraveling intricate issues with clarity and authority. You provide readers with nuanced perspectives on current events and broader societal topics.",
   "Masterful Author": "You are a masterful storyteller with exceptional command of narrative techniques and language. Your writing is eloquent, vivid, and deeply emotional, leaving a lasting impact through its artistry and profound insights. You evoke rich imagery and meaning, creating immersive and memorable reading experiences."
 };
+
+export const roleDescriptions: Record<RoleType, string> = {
+  "General Writer": "Versatile and adaptable writing style suitable for various topics and audiences.",
+  "Content Marketer": "Persuasive and engaging writing focused on marketing and brand awareness.",
+  "Gifted Highschool Student": "Clear and relatable explanations, making complex topics accessible to a wide audience.",
+  "World-class Scientist": "Analytical and precise writing style, explaining complex scientific concepts clearly.",
+  "Renowned Journalist": "Insightful and objective writing, presenting nuanced perspectives on current events.",
+  "Masterful Author": "Eloquent and vivid storytelling, creating immersive and emotionally impactful narratives."
+};

@@ -7,7 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Check, Copy } from "lucide-react"
 import Autocomplete, { AutocompleteRef } from '@/components/autocomplete-module/Autocomplete'
 import { generateSuggestion, modelMaxLengths, defaultRole } from '@/components/autocomplete-module/aiService'
-import { roles, RoleType } from '@/components/autocomplete-module/roles'
+import { roles, roleDescriptions, RoleType } from '@/components/autocomplete-module/roles'
 
 const defaultModels = [
   { value: 'openai/gpt-4o-mini', label: 'GPT-4o Mini' },
@@ -146,6 +146,9 @@ export default function DraftPage() {
                 ))}
               </SelectContent>
             </Select>
+            <p className="text-sm text-muted-foreground mt-2">
+              Writing style: {roleDescriptions[selectedRole]}
+            </p>
           </div>
           <div className="flex flex-col flex-grow min-h-0 relative">
             <div className="flex items-center justify-between mb-2">
@@ -159,14 +162,14 @@ export default function DraftPage() {
                 {isCopied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
               </Button>
             </div>
-            <div className="absolute inset-0 overflow-hidden">
+            <div className="flex-grow relative">
               <Autocomplete
                 ref={autocompleteRef}
                 onSelect={handleSelect}
                 generateSuggestions={(input: string) => generateSuggestion(input, selectedModel, selectedRole)}
                 model={selectedModel}
                 maxInputLength={modelMaxLengths[selectedModel] || 100000}
-                className="h-full w-full"
+                className="absolute inset-0"
                 suggestionClassName="mt-1 bg-background border rounded-md shadow-lg z-10 max-h-60 overflow-y-auto touch-pan-y"
               />
             </div>
