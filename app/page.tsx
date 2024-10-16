@@ -121,11 +121,11 @@ export default function HomePage() {
               <motion.div variants={fadeIn} initial="initial" whileInView="animate" viewport={{ once: true }}>
                 <Card>
                   <CardHeader>
-                    <CardTitle>LMStudio</CardTitle>
+                    <CardTitle>Google Gemini</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <CardDescription>
-                      Explore custom-trained models tailored for specific writing tasks and industries.
+                      Harness the power of Google's advanced AI for versatile and efficient language understanding and generation.
                     </CardDescription>
                   </CardContent>
                 </Card>

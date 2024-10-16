@@ -104,8 +104,7 @@ export default function DraftPage() {
           <CardTitle>AI Drafting</CardTitle>
           <CardDescription className="space-y-2">
             <p>
-              Experience the future of writing with our AI-powered drafting tool.
-              Receive real-time suggestions as you type, helping you craft compelling content faster and more efficiently.
+              Receive real-time suggestions as you type with our AI-powered drafting tool, helping you craft compelling content faster and more efficiently.
             </p>
             <ul className="list-disc list-inside">
               <li>Press <kbd className="px-1 py-0.5 rounded bg-gray-200 text-gray-800 text-xs font-semibold">Tab</kbd> to accept suggestion</li>
@@ -148,7 +147,7 @@ export default function DraftPage() {
               </SelectContent>
             </Select>
           </div>
-          <div className="flex-grow flex flex-col">
+          <div className="flex flex-col flex-grow min-h-0 relative">
             <div className="flex items-center justify-between mb-2">
               <p className="text-sm font-medium">Your draft:</p>
               <Button
@@ -160,7 +159,7 @@ export default function DraftPage() {
                 {isCopied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
               </Button>
             </div>
-            <div className="relative flex-grow">
+            <div className="absolute inset-0 overflow-hidden">
               <Autocomplete
                 ref={autocompleteRef}
                 onSelect={handleSelect}
