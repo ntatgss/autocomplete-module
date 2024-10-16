@@ -4,6 +4,8 @@ import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import Header from "@/components/Header";
 import { ClerkProvider } from "@clerk/nextjs";
+import { Analytics } from "@vercel/analytics/react"
+
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -35,6 +37,7 @@ export default function RootLayout({
           <Header />
           <main className="container mx-auto px-4 py-8">
             {children}
+            <Analytics />
           </main>
         </ThemeProvider>
       </body>
