@@ -6,7 +6,7 @@ const isProtectedRoute = createRouteMatcher(["/draft(.*)"]);
 export default clerkMiddleware(async (auth, req) => {
   const { userId, redirectToSignIn } = auth();
   if (!userId && isProtectedRoute(req)) {
-    return redirectToSignIn({ returnBackUrl: "/login" });
+    return redirectToSignIn({ returnBackUrl: "/signin" });
   }
 
   // If the user is logged in and the route is protected, let them view.
