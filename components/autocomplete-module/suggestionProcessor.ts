@@ -1,8 +1,8 @@
 export function processSuggestion(input: string, suggestion: string): string {
     suggestion = suggestion.trim();
   
-    // Remove any introductory phrases more effectively
-    suggestion = suggestion.replace(/^(Here is|Here's|This is|Certainly!|Sure!|Okay,).*?[:：]/i, '').trim();
+    // Remove any introductory phrases more efficiently
+    suggestion = suggestion.replace(/^(?:Here(?:'s| is)|This is|Certainly!|Sure!|Okay,).*?[:：]/i, '').trim();
   
     // Remove any part of the suggestion that duplicates the end of the input
     const inputWords = input.trim().split(/\s+/);
@@ -25,7 +25,10 @@ export function processSuggestion(input: string, suggestion: string): string {
       const lastCharInput = input[input.length - 1];
       const firstCharSuggestion = suggestion[0];
       
-      if (lastCharInput !== ' ' && firstCharSuggestion !== ' ') {
+      if (/[.!?:,;]/.test(lastCharInput) && firstCharSuggestion !== ' ') {
+        // If input ends with punctuation and suggestion doesn't start with space, add a space
+        suggestion = ' ' + suggestion;
+      } else if (lastCharInput !== ' ' && firstCharSuggestion !== ' ') {
         // If input doesn't end with space and suggestion doesn't start with space, add a space
         suggestion = ' ' + suggestion;
       } else if (lastCharInput === ' ' && firstCharSuggestion === ' ') {
@@ -43,5 +46,9 @@ export function processSuggestion(input: string, suggestion: string): string {
       suggestion = (completeSentences + ' ' + remainingText).trim();
     }
 
-    return suggestion;
+    // Remove any double spaces
+    suggestion = suggestion.replace(/\s+/g, ' ');
+
+    // Ensure we're not returning an empty string
+    return suggestion || input;
 }
