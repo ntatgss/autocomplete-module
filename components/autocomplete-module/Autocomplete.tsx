@@ -185,16 +185,18 @@ const Autocomplete = forwardRef<AutocompleteRef, AutocompleteProps>(
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
           onSelect={(e) => setCursorPosition(e.currentTarget.selectionStart)}
-          className="flex w-full p-2 border rounded resize-none text-sm bg-background text-foreground"
+          className="flex w-full p-2 border rounded resize-none text-sm bg-background text-foreground flex-grow"
           placeholder="Start typing..."
           aria-label="Autocomplete input"
           aria-describedby="autocomplete-suggestion"
           style={{ 
             minHeight: '100px',
+            maxHeight: 'calc(100% - 150px)', // Adjust this value as needed
+            overflowY: 'auto',
           }}
         />
-        <div className="flex-shrink-0 bg-background">
-          <div className="flex-shrink-0 max-h-[40vh] overflow-y-auto">
+        <div className="flex-shrink-0 bg-background mt-2">
+          <div className="max-h-[150px] overflow-y-auto"> {/* Adjust max-height as needed */}
             {exceededMaxLength && (
               <div className="text-yellow-500 text-sm mb-2" role="alert">
                 Input exceeds {maxInputLength} characters. AI suggestions will only use the first {maxInputLength} characters.
@@ -209,7 +211,7 @@ const Autocomplete = forwardRef<AutocompleteRef, AutocompleteProps>(
                 <div 
                   ref={suggestionRef}
                   className={`p-2 bg-background overflow-auto ${suggestionClassName}`}
-                  style={{ maxHeight: '200px' }}
+                  style={{ maxHeight: '80px' }} // Adjust this value as needed
                   id="autocomplete-suggestion"
                   role="status"
                   aria-live="polite"

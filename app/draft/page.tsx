@@ -98,11 +98,11 @@ export default function DraftPage() {
   }
 
   return (
-    <div className="container mx-auto p-4 h-screen flex flex-col">
+    <div className="container mx-auto p-2 sm:p-4 min-h-screen flex flex-col">
       <Card className="flex-grow flex flex-col overflow-hidden">
-        <CardHeader>
-          <CardTitle>AI Drafting</CardTitle>
-          <CardDescription className="space-y-2">
+        <CardHeader className="flex-shrink-0">
+          <CardTitle className="text-xl sm:text-2xl">AI Drafting</CardTitle>
+          <CardDescription className="space-y-2 text-sm sm:text-base">
             <p>
               Receive real-time suggestions as you type with our AI-powered drafting tool, helping you craft compelling content faster and more efficiently.
             </p>
@@ -150,8 +150,8 @@ export default function DraftPage() {
               Writing style: {roleDescriptions[selectedRole]}
             </p>
           </div>
-          <div className="flex flex-col flex-grow min-h-0 relative">
-            <div className="flex items-center justify-between mb-2">
+          <div className="flex flex-col flex-grow min-h-0 relative mt-4">
+            <div className="flex items-center justify-between mb-2 flex-shrink-0">
               <p className="text-sm font-medium">Your draft:</p>
               <Button
                 variant="outline"
@@ -162,15 +162,15 @@ export default function DraftPage() {
                 {isCopied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
               </Button>
             </div>
-            <div className="flex-grow relative">
+            <div className="flex-grow relative h-[300px] sm:h-auto">
               <Autocomplete
                 ref={autocompleteRef}
                 onSelect={handleSelect}
                 generateSuggestions={(input: string) => generateSuggestion(input, selectedModel, selectedRole)}
                 model={selectedModel}
                 maxInputLength={modelMaxLengths[selectedModel] || 100000}
-                className="absolute inset-0"
-                suggestionClassName="mt-1 bg-background border rounded-md shadow-lg z-10 max-h-60 overflow-y-auto touch-pan-y"
+                className="absolute inset-0 flex flex-col"
+                suggestionClassName="mt-1 bg-background border rounded-md shadow-lg z-10"
               />
             </div>
           </div>
